@@ -9,15 +9,14 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                bat 'pip install bandit'
+                bat '"C:\\Users\\meyudha\\AppData\\Roaming\\Python\\Python38\\Scripts\\pip.exe" install bandit'
             }
         }
         stage('SAST Analysis') {
             steps {
-                bat 'bandit -f xml -o bandit-output.xml -r . || exit 0'
+                bat '"C:\\Users\\meyudha\\AppData\\Roaming\\Python\\Python38\\Scripts\\bandit.exe" -f xml -o bandit-output.xml -r . || exit 0'
                 recordIssues tools: [bandit(pattern: 'bandit-output.xml')]
             }
         }
     }
 }
-
