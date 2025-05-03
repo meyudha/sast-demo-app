@@ -1,10 +1,9 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/meyudha/sast-demo-app.git', branch: 'master'
+                git 'https://github.com/meyudha/sast-demo-app.git'
             }
         }
 
@@ -17,6 +16,11 @@ pipeline {
         stage('Run Bandit (SAST Analysis)') {
             steps {
                 bat 'bandit -f xml -o bandit-output.xml -r . || exit 0'
+            }
+        }
+
+        stage('Record Bandit Warnings') {
+            steps {
                 recordIssues tools: [bandit(pattern: 'bandit-output.xml')]
             }
         }
