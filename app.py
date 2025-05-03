@@ -1,7 +1,7 @@
 import subprocess
 
 def greet(name):
-    print(f"Hello, {name}!")
+    print(f"Hello, Yudha!")
 
 def run_command(cmd):
     subprocess.call(cmd, shell=True)
