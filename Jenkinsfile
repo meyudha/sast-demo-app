@@ -10,13 +10,13 @@ pipeline {
 
         stage('Install Bandit') {
             steps {
-                sh 'pip install bandit'
+                bat 'pip install bandit'
             }
         }
 
         stage('Run Bandit (SAST Analysis)') {
             steps {
-                sh 'bandit -f xml -o bandit-output.xml -r . || true'
+                bat 'bandit -f xml -o bandit-output.xml -r . || exit 0'
                 recordIssues tools: [bandit(pattern: 'bandit-output.xml')]
             }
         }
