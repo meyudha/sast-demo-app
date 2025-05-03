@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
@@ -19,9 +20,9 @@ pipeline {
             }
         }
 
-        stage('Record Bandit Warnings') {
+        stage('Archive Bandit Results') {
             steps {
-                recordIssues tools: [bandit(pattern: 'bandit-output.xml')]
+                archiveArtifacts artifacts: 'bandit-output.xml', allowEmptyArchive: true
             }
         }
     }
